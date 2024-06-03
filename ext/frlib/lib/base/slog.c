@@ -192,7 +192,7 @@ frlogf (
 {
 	va_list		ap;
 	int			ret;
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	if (!fmt || !*fmt || level < 0) return RERR_PARAM;
 
@@ -212,7 +212,7 @@ slogf (
 {
 	va_list		ap;
 	int			ret;
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	if (!fmt || !*fmt || level < 0) return RERR_PARAM;
 
@@ -232,7 +232,7 @@ smlogf (
 {
 	va_list		ap;
 	int			ret;
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	if (!fmt || !*fmt || level < 0) return RERR_PARAM;
 
@@ -252,7 +252,7 @@ shlogf (
 {
 	va_list		ap;
 	int			ret;
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	if (!fmt || !*fmt || level < 0) return RERR_PARAM;
 
@@ -275,7 +275,7 @@ sxlogf (
 {
 	va_list		ap;
 	int			ret;
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	if (!fmt || !*fmt || level < 0) return RERR_PARAM;
 
@@ -299,7 +299,7 @@ sxmlogf (
 {
 	va_list		ap;
 	int			ret;
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	if (!fmt || !*fmt || level < 0) return RERR_PARAM;
 
@@ -323,7 +323,7 @@ sxhlogf (
 {
 	va_list		ap;
 	int			ret;
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	if (!fmt || !*fmt || level < 0) return RERR_PARAM;
 
@@ -340,7 +340,7 @@ vslogf (level, fmt, ap)
 	const char	*fmt;
 	va_list		ap;
 {
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	return vsxhlogf (0, level, NULL, 0, NULL, 
 					(getcontext(&ctx) == 0 ? &ctx : NULL), fmt, ap);
@@ -354,7 +354,7 @@ vsmlogf (module, level, fmt, ap)
 	va_list		ap;
 {
 	int			handle;
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	CF_MAY_READ;
 	handle = module2handle (module);
@@ -385,7 +385,7 @@ vshlogf (handle, level, fmt, ap)
 	const char	*fmt;
 	va_list		ap;
 {
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	return vsxhlogf (handle, level, NULL, 0, NULL, 
 					(getcontext(&ctx) == 0 ? &ctx : NULL), fmt, ap);
@@ -400,7 +400,7 @@ vsxlogf (level, fname, lineno, funcname, ptr, fmt, ap)
 	va_list		ap;
 	void			*ptr;
 {
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	if (!ptr && (getcontext (&ctx) == 0)) ptr = &ctx;
 	return vsxhlogf (0, level, fname, lineno, funcname, ptr, fmt, ap);
@@ -417,7 +417,7 @@ vsxmlogf (module, level, fname, lineno, funcname, ptr, fmt, ap)
 	void			*ptr;
 {
 	int			handle;
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	CF_MAY_READ;
 	if (!ptr && (getcontext (&ctx) == 0)) ptr = &ctx;
@@ -444,7 +444,7 @@ vsxhlogf (handle, level, fname, lineno, funcname, ptr, fmt, ap)
 	va_list			ap2;
 	int				ret;
 	struct logconf	*lc;
-	ucontext_t		ctx;
+	frcontext_t		ctx;
 
 	if (!fmt || !*fmt || level < 0) return RERR_PARAM;
 
@@ -511,7 +511,7 @@ slogstr (level, msg)
 	int			level;
 	const char	*msg;
 {
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	return do_shlogstr (0, level, ((getcontext (&ctx) == 0) ? &ctx : NULL), msg);
 }
@@ -523,7 +523,7 @@ smlogstr (module, level, msg)
 	const char	*msg;
 {
 	int			handle;
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	CF_MAY_READ;
 	handle = module2handle (module);
@@ -537,7 +537,7 @@ shlogstr (handle, level, msg)
 	int			level;
 	const char	*msg;
 {
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	return do_shlogstr (handle, level, ((getcontext (&ctx) == 0) ? &ctx : NULL), msg);
 }
@@ -556,7 +556,7 @@ do_shlogstr (handle, level, ptr, msg)
 	int				ret, ret2;
 	int				origlevel, hasprtstderr=0;
 	struct logconf	*lc;
-	ucontext_t		ctx;
+	frcontext_t		ctx;
 
 	if (!msg || !*msg || level < 0) return RERR_PARAM;
 	if (!ptr && (getcontext(&ctx)==0)) ptr = &ctx;
@@ -667,7 +667,7 @@ sxlogstr (level, fname, lineno, funcname, ptr, msg)
 	int			lineno;
 	void			*ptr;
 {
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	if (!ptr && (getcontext (&ctx) == 0)) ptr = &ctx;
 	return sxhlogstr (0, level, fname, lineno, funcname, ptr, msg);
@@ -683,7 +683,7 @@ sxmlogstr (module, level, fname, lineno, funcname, ptr, msg)
 	void			*ptr;
 {
 	int			handle;
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	CF_MAY_READ;
 	if (!ptr && (getcontext (&ctx) == 0)) ptr = &ctx;
@@ -701,7 +701,7 @@ sxhlogstr (handle, level, fname, lineno, funcname, ptr, msg)
 	int			lineno;
 	void			*ptr;
 {
-	ucontext_t	ctx;
+	frcontext_t	ctx;
 
 	if (!ptr && (getcontext (&ctx) == 0)) ptr = &ctx;
 	if (!fname && !funcname) {

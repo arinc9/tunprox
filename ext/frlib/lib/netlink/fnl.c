@@ -27,7 +27,7 @@
 #include <errno.h>
 #include <sys/poll.h>
 #include <sys/stat.h>
-#define __USE_GNU
+#define _GNU_SOURCE
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <arpa/inet.h>

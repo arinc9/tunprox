@@ -35,7 +35,7 @@ bufcp (dest, src)
 	BUFFER 					help;
 	int						ret;
 	int						tid;
-	u_int32_t				len, num;
+	uint32_t				len, num;
 	char						*str;
 
 	if (!dest || !src) return RERR_PARAM;
@@ -155,7 +155,7 @@ bufmv (dest, src)
 {
 	struct buffer	*pd, *ps;
 	int				otype, ret, tid;
-	u_int32_t		len, num;
+	uint32_t		len, num;
 
 	if (!dest || !src) return RERR_PARAM;
 	if (dest == src) return RERR_PARAM;
@@ -253,7 +253,7 @@ bufconvert (buf, type)
 	struct buf_memlist	*qm, *qmnext;
 	struct buf_blocklist	*qb, *qbnext;
 	int						ret, ret2;
-	u_int32_t				len, origlen;
+	uint32_t				len, origlen;
 	char						*str;
 
 	if (!buf || type < BUF_TYPE_MIN || type > BUF_TYPE_MAX) return RERR_PARAM;
@@ -393,7 +393,7 @@ buf_convempty (buf, type)
 	struct buffer	*buf;
 	int				type;
 {
-	u_int32_t	len;
+	uint32_t	len;
 
 	if (!buf || type < BUF_TYPE_MIN || type > BUF_TYPE_MAX) return RERR_PARAM;
 	if (buf->type == type) return RERR_OK;
@@ -426,8 +426,8 @@ buf_convempty (buf, type)
 		break;
 	}
 	/* hack - but faster */
-	len = (u_int32_t)(size_t)&(((struct buffer*)0)->next) - 
-				(u_int32_t)(size_t)&(((struct buffer*)0)->dat);
+	len = (uint32_t)(size_t)&(((struct buffer*)0)->next) - 
+				(uint32_t)(size_t)&(((struct buffer*)0)->dat);
 	bzero (&(buf->dat), len);
 	buf->type = buf->otype = type;
 	return RERR_OK;

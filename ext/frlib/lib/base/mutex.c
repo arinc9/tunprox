@@ -25,8 +25,8 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
-#ifndef __USE_GNU
-# define __USE_GNU
+#ifndef _GNU_SOURCE
+# define _GNU_SOURCE
 #endif
 #include <sys/sem.h>
 #include <errno.h>

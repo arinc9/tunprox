@@ -21,31 +21,23 @@
 
 #include "frcontext.h"
 #include <errno.h>
-#ifdef SunOS
-extern int errno;
-#endif
 
-#if defined __UCLIBC__ || defined __ANDROID__
-
-
-int
-getcontext (ucp)
-	ucontext_t	*ucp;
+int getcontext(frcontext_t *ucp)
 {
-	errno = ENOTSUP;
-	return -1;
+    if (!ucp) return -1;
+    ucp->thread = pthread_self();
+    return setjmp(ucp->env);
 }
 
-int
-setcontext (ucp)
-	const ucontext_t	*ucp;
+int setcontext(const frcontext_t *ucp)
 {
-	errno = ENOTSUP;
-	return -1;
+    if (!ucp) {
+        errno = EINVAL;
+        return -1;
+    }
+    longjmp(ucp->env, 1);
+    return 0;  // should not return if longjmp is successful
 }
-
-
-#endif	/* __UCLIBC__ */
 
 
 

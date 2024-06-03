@@ -36,7 +36,7 @@ extern "C" {
 
 DLSTUB_MKSTUB_A2 (nanosleep, int, const struct timespec*, struct timespec*)
 DLSTUB_MKSTUB_A2 (clock_gettime, int, clockid_t, struct timespec*)
-DLSTUB_MKSTUB_A3 (shmopen, int, const char*, int, mode_t)
+DLSTUB_MKSTUB_A3 (shmopen, int, const char*, int, gid_t)
 DLSTUB_MKSTUB_A1 (shmunlink, int, const char*)
 
 

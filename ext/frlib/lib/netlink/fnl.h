@@ -21,9 +21,15 @@
 #ifndef _R__FRLIB_LIB_NETLINK_FNL_H
 #define _R__FRLIB_LIB_NETLINK_FNL_H
 
-#ifndef __USE_GNU
-#define __USE_GNU
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE
 #endif
+
+#ifndef SCM_CREDENTIALS
+#define SCM_CREDENTIALS 0x02
+#endif
+
+
 #include <sys/socket.h>
 #include <linux/netlink.h>
 #include <linux/genetlink.h>
@@ -34,7 +40,6 @@
 extern "C" {
 #endif
 
-struct ucred;
 
 /* flags */
 #define FNL_F_NONE		0x00

@@ -35,7 +35,7 @@ int dldump(const char*, const char*, int);
 void *dlopen(const char *str, int x) {return NULL;}
 void *dlsym(void *ptr, const char *str) {return NULL;}
 int dlclose(void *ptr) {return 0;}
-//#if !defined __USE_GNU && !defined __UCLIBC__
+//#if !defined _GNU_SOURCE && !defined __UCLIBC__
 #ifdef __ANDROID__
 const
 #endif
@@ -49,7 +49,7 @@ int dlinfo(void *ptr1, int x, void *ptr2);
 int dlinfo(void *ptr1, int x, void *ptr2) {return 0;}
 #endif
 
-#ifdef __USE_GNU
+#ifdef _GNU_SOURCE
 void *_dlopen(const char *str, int x);
 void *_dlopen(const char *str, int x) {return NULL;}
 void *_dlsym(void *ptr, const char *str);
@@ -69,13 +69,13 @@ int _dlinfo(void *ptr1, int x, void *ptr2) {return 0;}
 #endif
 #endif
 
-#if defined __USE_GNU && !defined __UCLIBC__
+#if defined _GNU_SOURCE && !defined __UCLIBC__
 int dladdr(const void *ptr1, Dl_info *ptr2) {return 0;}
 int _dladdr(const void *ptr1, Dl_info *ptr2);
 int _dladdr(const void *ptr1, Dl_info *ptr2) {return 0;}
-void *dlmopen(Lmid_t a, const char *str, int x) {return NULL;}
-void *_dlmopen(Lmid_t a, const char *str, int x);
-void *_dlmopen(Lmid_t a, const char *str, int x) {return NULL;}
+void *dlmopen(gid_t a, const char *str, int x) {return NULL;}
+void *_dlmopen(gid_t a, const char *str, int x);
+void *_dlmopen(gid_t a, const char *str, int x) {return NULL;}
 #endif
 
 

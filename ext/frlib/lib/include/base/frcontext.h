@@ -21,18 +21,16 @@
 #ifndef _R__FRLIB_BASE_FRCONTEXT_H
 #define _R__FRLIB_BASE_FRCONTEXT_H
 
-#include <stdlib.h>
-#if 0 /* defined __UCLIBC__ */ /* || defined __ANDROID__ */ 
-	/* android has the header but not the functions while uclibc lacks both */
-typedef int ucontext_t;
-#else
-#include <ucontext.h>
-#endif
+#include <pthread.h>
+#include <setjmp.h>
 
-int getcontext(ucontext_t *ucp);
-int setcontext(const ucontext_t *ucp);
+typedef struct frcontext {
+    jmp_buf env;
+    pthread_t thread;
+} frcontext_t;
 
-
+int getcontext(frcontext_t *ucp);
+int setcontext(const frcontext_t *ucp);
 
 #endif	/* _R__FRLIB_BASE_FRCONTEXT_H */
 

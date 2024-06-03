@@ -107,7 +107,7 @@ int sxhlogstr (int handle, int level, const char *fname, int lineno,
 #include <fr/base/misc.h>
 #define SLOGF(level,...) do { \
 			char			_r__errstr[96]; \
-			ucontext_t	_r__ctx; \
+			frcontext_t	_r__ctx; \
 			*_r__errstr = 0; \
 			getcontext (&_r__ctx); \
 			sxhlogf (0, (level), __FILE__, __LINE__, \
@@ -115,7 +115,7 @@ int sxhlogstr (int handle, int level, const char *fname, int lineno,
 		} while (0)
 #define SMLOGF(module,level,...) do { \
 			char			_r__errstr[96]; \
-			ucontext_t	_r__ctx; \
+			frcontext_t	_r__ctx; \
 			*_r__errstr = 0; \
 			getcontext (&_r__ctx); \
 			sxmlogf ((module), (level), __FILE__, \
@@ -123,7 +123,7 @@ int sxhlogstr (int handle, int level, const char *fname, int lineno,
 		} while (0)
 #define SHLOGF(handle,level,...) do { \
 			char			_r__errstr[96]; \
-			ucontext_t	_r__ctx; \
+			frcontext_t	_r__ctx; \
 			*_r__errstr = 0; \
 			getcontext (&_r__ctx); \
 			sxhlogf ((handle), (level), __FILE__, \
@@ -155,7 +155,7 @@ int frlogf (int level, const char *fmt, ...) __attribute__((format(printf, 2, 3)
 
 #define FRLOGF(level,...) do { \
 			char			_r__errstr[96]; \
-			ucontext_t	_r__ctx; \
+			frcontext_t	_r__ctx; \
 			*_r__errstr = 0; \
 			getcontext (&_r__ctx); \
 			sxhlogf (SLOG_H_FRLIB, (level), __FILE__, \

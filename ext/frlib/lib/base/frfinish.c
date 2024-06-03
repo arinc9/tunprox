@@ -226,7 +226,7 @@ doinit ()
 {
 	if (isinit) return;
 	TLST_NEW(finishfuncs,struct func_t);
-	on_exit (callonexit, NULL);
+	atexit (callonexit);
 	isinit = 1;
 }
 
